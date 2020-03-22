@@ -96,6 +96,10 @@ void GUIMainFrame::funcScrollSlider( wxScrollEvent& event )
 	_position = event.GetPosition();
 	//pozycje przekazujemy do gauge'a
 	handGauge -> SetValue(_position);
+	
+	//dodane by aktualizowalo obrazek przy kazdym ruchu scrollbara
+	wxClientDC MyDC(drawingPanel);
+	paintOnPanel(MyDC);
 }
 
 //funkcja obslugujaca przycisk, ktora uruchamia okno dialogowe do wyboru koloru
