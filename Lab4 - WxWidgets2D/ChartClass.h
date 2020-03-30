@@ -22,7 +22,7 @@ private:
     Matrix Set_Rotation(double alpha);
     Matrix Set_Scale(int w, int h);
 
-    //FUNKCJE RYSUJ¥CE/OBS£UGUJ¥CE///////////////////////
+    //FUNKCJE RYSUJACE/OBSLUGUJACE///////////////////////
     void line2d(wxDC* DC, Matrix t, double x1, double y1, double x2, double y2, int w, int h);
     void setTransformM(Matrix& transformationM, double x0, double y0, int w, int h);
     void setCenter(double& x0, double& y0, int w, int h);
@@ -41,7 +41,7 @@ public:
     double Get_Y_min(); // zwraca y_min
     double Get_Y_max(); // zwraca y_max
 
-    //FUNKCJE RYSUJ¥CE////////////////////////////////////
+    //FUNKCJE RYSUJACE////////////////////////////////////
     void Draw(wxDC* DC, int w, int h);  // rysuje wykres
 };
 
