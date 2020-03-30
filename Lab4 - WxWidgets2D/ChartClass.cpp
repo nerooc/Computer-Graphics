@@ -31,8 +31,8 @@ Matrix ChartClass::Set_Translate(double Tx, double Ty)
 	return translateM;
 }
 
-//FUNKCJA SKALUJ¥CA
-//MACIERZ SKALUJ¥CA:
+//FUNKCJA SKALUJACA
+//MACIERZ SKALUJACA:
 //
 //	 _   _				
 //	|Sx  0|
@@ -54,7 +54,7 @@ Matrix ChartClass::Set_Scale(int w, int h)
 	return scaleM;
 }
 
-//FUNKCJA OBRACAJ¥CA
+//FUNKCJA OBRACAJSCA
 //MACIERZ ROTACJI:
 //	 ___				___	
 //	|cos(alpha) -sin(alpha)|
@@ -133,7 +133,7 @@ double ChartClass::Get_Y_max()
 }
 
 
-//FUNKCJE RYSUJ¥CE/OBS£UGUJ¥CE////////////////////////////////////
+//FUNKCJE RYSUJACE/OBSLUGUJACE////////////////////////////////////
 
 
 void ChartClass::Draw(wxDC* DC, int w, int h)
@@ -142,16 +142,16 @@ void ChartClass::Draw(wxDC* DC, int w, int h)
 	double x0, y0;
 	setCenter(x0, y0, w, h);
 
-	//ZMIENIAMY KOLOR T£A
+	//ZMIENIAMY KOLOR TLA
 	DC->SetBackground(wxBrush(wxColour(*wxWHITE)));
 	
-	//CZYŒCIMY T£O
+	//CZYSCIMY TLO
 	DC->Clear();
 
 	//ZMIENIAMY KOLOR NA CZERWONY
 	DC->SetPen(wxPen(wxColour(*wxRED)));
 
-	//RYSUJEMY PROSTOK¥T OKALAJ¥CY WYKRES
+	//RYSUJEMY PROSTOKAT OKALAJACY WYKRES
 	DC->DrawRectangle(10, 10, w - 20, h - 20);
 
 	//TWORZYMY MACIERZ TRANSFORMACJI
@@ -168,7 +168,7 @@ void ChartClass::Draw(wxDC* DC, int w, int h)
 	//RYSUJEMY OSIE
 	drawAxes(DC, transformationM, w, h);
 	
-	//DEFINIUJÊ WARTOŒCI KTÓRYCH U¯YJÊ DO NARYSOWANIA OZNACZEÑ WARTOŒCI NA OSIACH
+	//DEFINIUJE WARTOSCI KTORYCH UZYJE DO NARYSOWANIA OZNACZEN WARTOSCI NA OSIACH
 	double v1 = cfg->Get_x_start() / 2;
 	double v2 = cfg->Get_x_stop() / 3;
 	double v3 = 2 * cfg->Get_x_stop() / 3;
@@ -176,15 +176,15 @@ void ChartClass::Draw(wxDC* DC, int w, int h)
 	double v5 = Get_Y_max() / 3;
 	double v6 = 2 * Get_Y_max() / 3;
 	
-	//U£ADNIENIE STRZA£EK I DANIE W FUNKCJÊ
+	//ULADNIENIE STRZALEK I DANIE W FUNKCJE
 	drawArrows(DC, transformationM, w, h);
 	
-	//RYSUJEMY WARTOŒCI NA OSI X
+	//RYSUJEMY WARTOSCI NA OSI X
 	drawMarkX(DC, transformationM, v1, w, h);
 	drawMarkX(DC, transformationM, v2, w, h);
 	drawMarkX(DC, transformationM, v3, w, h);
 	
-	//RYSUJEMY WARTOŒCI NA OSI Y
+	//RYSUJEMY WARTOSCI NA OSI Y
 	drawMarkY(DC, transformationM, v4, w, h);
 	drawMarkY(DC, transformationM, v5, w, h);
 	drawMarkY(DC, transformationM, v6, w, h);
@@ -194,15 +194,15 @@ void ChartClass::Draw(wxDC* DC, int w, int h)
 	
 }
 
-//FUNKCJA ZA POMOC¥ KTÓREJ RYSUJEMY WSZYSTKO NA EKRANIE, WSZYSTKO CO MA BYÆ OBJÊTE TRANSFORMACJAMI
+//FUNKCJA ZA POMOCÂ¥ KTÃ“REJ RYSUJEMY WSZYSTKO NA EKRANIE, WSZYSTKO CO MA BYÃ† OBJÃŠTE TRANSFORMACJAMI
 void ChartClass::line2d(wxDC* DC,  Matrix transfromationM, double x1, double y1, double x2, double y2,  int w, int h)
 {
-	//PUNKT (WEKTOR) POCZ¥TKOWY
+	//PUNKT (WEKTOR) POCZATKOWY
 	Vector init;
 	init.Set(x1, y1);
 	init = transfromationM * init;
 
-	//PUNKT (WEKTOR) KOÑCOWY
+	//PUNKT (WEKTOR) KONCOWY
 	Vector extr;
 	extr.Set(x2, y2);
 	extr = transfromationM * extr;
@@ -212,16 +212,16 @@ void ChartClass::line2d(wxDC* DC,  Matrix transfromationM, double x1, double y1,
 
 }
 
-//SK£ADAMY MACIERZ TRANSFORMACJI
+//SKLADAMY MACIERZ TRANSFORMACJI
 void ChartClass::setTransformM(Matrix& transformationM, double x0, double y0, int w, int h) {
-	//ZA POMOC¥ INSTRUKCJI SWITCH ZALE¯NIE OD TEGO CZY MAMY OBRACAÆ DOOK£A ŒRODKA EKRANU LUB ŒRODKA UK£ADU, KOLEJNOŒÆ MNO¯EÑ JEST ZAMIENIONA
+	//ZA POMOCAÂ¥ INSTRUKCJI SWITCH ZALEZNIE OD TEGO CZY MAMY OBRACAC DOOKOLA SRODKA EKRANU LUB SRODKA UKÂ£ADU, KOLEJNOSC MNOZEN JEST ZAMIENIONA
 	transformationM = (cfg->RotateScreenCenter() ? Set_Translate(x0, y0) * Set_Rotation(cfg->Get_Alpha()) * Set_Translate(cfg->Get_dX(), cfg->Get_dY()) * Set_Scale(w, h) : Set_Translate(x0, y0) * Set_Translate(cfg->Get_dX(), cfg->Get_dY()) * Set_Rotation(cfg->Get_Alpha()) * Set_Scale(w, h));
 }
 
-//FUNKCJA USTALAJ¥CA ŒRODEK
+//FUNKCJA USTALAJACA SRODEK
 void ChartClass::setCenter(double& x0, double& y0, int w, int h) {
 
-	//POBIERAMY WARTOŒCI ZA POMOC¥ FUNKCJI GET_[ELEMENT]
+	//POBIERAMY WARTOSCI ZA POMOCA FUNKCJI GET_[ELEMENT]
 	double actx0 = cfg->Get_x0();
 	double actx1 = cfg->Get_x1();
 	double acty0 = cfg->Get_y0();
@@ -232,10 +232,10 @@ void ChartClass::setCenter(double& x0, double& y0, int w, int h) {
 	y0 = - (((double)h - 20) / (acty0 - acty1)) * acty1 + 10;
 }
 
-//FUNKCJA RYSUJ¥CA OSIE X I Y
+//FUNKCJA RYSUJACA OSIE X I Y
 void ChartClass::drawAxes(wxDC* DC, Matrix transformationM, int w, int h) {
 	
-	//POBIERAMY WARTOŒCI ZA POMOC¥ FUNKCJI GET_[ELEMENT]
+	//POBIERAMY WARTOSCI ZA POMOCÂ¥ FUNKCJI GET_[ELEMENT]
 	double initX = cfg->Get_x_start();
 	double extrX = cfg->Get_x_stop();
 
@@ -245,65 +245,65 @@ void ChartClass::drawAxes(wxDC* DC, Matrix transformationM, int w, int h) {
 	//ZMIENIAMY KOLOR NA NIEBIESKI
 	DC->SetPen(wxPen(wxColour(*wxBLUE)));
 
-	//RYSUJEMY OŒ X
+	//RYSUJEMY OS X
 	line2d(DC, transformationM, initX, 0, extrX, 0, w, h);
 
-	//RYSUJEMY OŒ Y
+	//RYSUJEMY OS Y
 	line2d(DC, transformationM, 0, initY, 0, extrY, w, h);
 }
 
-//FUNKCJA RYSUJ¥CA STRZA£KI NA KOÑCACH OSI
+//FUNKCJA RYSUJACA STRZALKI NA KONCACH OSI
 void ChartClass::drawArrows(wxDC* DC, Matrix transformationM, int w, int h) {
 
-	//POBIERAMY WARTOŒCI ZA POMOC¥ FUNKCJI GET_[ELEMENT]
+	//POBIERAMY WARTOSCI ZA POMOCA FUNKCJI GET_[ELEMENT]
 	double x1 = cfg->Get_x_stop();
 	double y1 = Get_Y_max();
 
-	//STRZA£KA NA OSI X
+	//STRZAÂ£KA NA OSI X
 	line2d(DC, transformationM, x1, 0, x1 - 0.08, 0.03, w, h);
 	line2d(DC, transformationM, x1, 0, x1 - 0.08, -0.03, w, h);
 	
-	//STRZA£KA NA OSI Y
+	//STRZAÂ£KA NA OSI Y
 	line2d(DC, transformationM, 0, -y1, 0.03, -y1 + 0.08, w, h);
 	line2d(DC, transformationM, 0, -y1, -0.03, -y1 + 0.08, w, h);
 }
 
-//FUNKCJA RYSUJ¥CA WARTOŒCI NA OSI X
+//FUNKCJA RYSUJACA WARTOSCI NA OSI X
 void ChartClass::drawMarkX(wxDC* DC, Matrix transformationM, double v, int w, int h) {
 	
-	//PUNKT (WEKTOR) W KTÓRYM BÊDZIE ZNAJDOWA£ SIÊ NAPIS
+	//PUNKT (WEKTOR) W KTORYM BEDZIE ZNAJDOWAL SIE NAPIS
 	Vector vc;
 	vc.Set(v, 0.07);
 
-	//POBIERMY WARTOŒÆ K¥TA
+	//POBIERMY WARTOSC KATA
 	double alpha = cfg->Get_Alpha();
 
-	//RYSUJEMY LINIÊ
+	//RYSUJEMY LINIE
 	line2d(DC, transformationM, v, 0.06, v, -0.06, w, h);
 
-	//RYSUJEMY WARTOŒÆ
+	//RYSUJEMY WARTOSC
 	DC->DrawRotatedText(wxString::Format(wxT("%.2f"), v), (transformationM * vc).GetX(), (transformationM * vc).GetY(), alpha);
 	//DWA MIEJSCA PO PRZECINKU LICZBY ZMIENNOPRZECINKOWEJ
 }
 
-//FUNKCJA RYSUJ¥CA WARTOŒCI NA OSI Y
+//FUNKCJA RYSUJACA WARTOSCI NA OSI Y
 void ChartClass::drawMarkY(wxDC* DC, Matrix transformationM, double v, int w, int h) {
 	
-	//PUNKT (WEKTOR) W KTÓRYM BÊDZIE ZNAJDOWA£ SIÊ NAPIS
+	//PUNKT (WEKTOR) W KTORYM BEDZIE ZNAJDOWAL SIE NAPIS
 	Vector vc;
 	vc.Set(0.04, -v);
 
-	//POBIERMY WARTOŒÆ K¥TA
+	//POBIERMY WARTOSC KATA
 	double alpha = cfg->Get_Alpha();
 
-	//RYSUJEMY LINIÊ
+	//RYSUJEMY LINIE
 	line2d(DC, transformationM, 0.04, -v, -0.04, -v, w, h);
 	
-	//RYSUJEMY WARTOŒÆ
+	//RYSUJEMY WARTOSC
 	DC->DrawRotatedText(wxString::Format(wxT("%.2f"), v), (transformationM * vc).GetX(), (transformationM * vc).GetY(), alpha);
 }
 
-//FUNKCJA RYSUJ¥CA DAN¥ FUNKCJÊ
+//FUNKCJA RYSUJACA DANA FUNKCJE
 void ChartClass::drawFunction(wxDC* DC, Matrix transformationM, int w, int h, double step) {
 	
 	//ZMIENIAMY KOLOR NA CZERWONY
@@ -315,10 +315,10 @@ void ChartClass::drawFunction(wxDC* DC, Matrix transformationM, int w, int h, do
 	}
 }
 
-//FUNKCJA USTALAJ¥CA KROK
+//FUNKCJA USTALAJACA KROK
 void ChartClass::setStep(double& step) {
 
-	//POBIERAMY WARTOŒCI ZA POMOC¥ FUNKCJI GET_[ELEMENT]
+	//POBIERAMY WARTOSCI ZA POMOCA FUNKCJI GET_[ELEMENT]
 	double x0 = cfg->Get_x_start();
 	double x1 = cfg->Get_x_stop();
 
