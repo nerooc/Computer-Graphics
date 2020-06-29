@@ -3,7 +3,7 @@
 # Computer Graphics [PL]
 Zadania z zajęć laboratoryjnych z przedmiotu pt. "Podstawy grafiki komputerowej" prowadzonych na Wydziale Fizyki i Informatyki Stosowanej AGH. Zajęcia prowadzone przez **dr inż. Janusza Malinowskiego**. Wszystkie zadania ocenione na **maksymalną możliwą liczbę punktów**, oprócz ostatniego, które nie posiada jednej wymaganej funkcjonalności. Zapraszam do korzystania, jednak przed użyciem **zalecam jeszcze samodzielnie sprawdzić poprawność**.
  
-| Number | Lab |
+| Number | Topic |
 | ------ | -------- |
 | 1 | [SFML](https://github.com/nerooc/Computer-Graphics-PL/tree/master/Lab1%20-%20SFML)
 | 2 | [SFML](https://github.com/nerooc/Computer-Graphics-PL/tree/master/Lab2%20-%20SFML)
