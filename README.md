@@ -1,5 +1,3 @@
-# Computer Graphics
- Exercises from 'Intro to Computer Graphics' at AGH UST.
 # Computer Graphics [PL]
 Zadania z zajęć laboratoryjnych z przedmiotu pt. "Podstawy grafiki komputerowej" prowadzonych na Wydziale Fizyki i Informatyki Stosowanej AGH. Zajęcia prowadzone przez **dr inż. Janusza Malinowskiego**. Wszystkie zadania ocenione na **maksymalną możliwą liczbę punktów**, oprócz ostatniego, które nie posiada jednej wymaganej funkcjonalności. Zapraszam do korzystania, jednak przed użyciem **zalecam jeszcze samodzielnie sprawdzić poprawność**.
  
